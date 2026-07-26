@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-pixel: "Press Start 2P", ui-monospace, monospace;
+  --font-system: "IBM Plex Mono", ui-monospace, monospace;
+  --color-crt-green: #33ff33;
+  --color-crt-amber: #ffb000;
+  --color-crt-blue: #00ccff;
+  --color-crt-white: #c0c0c0;
+  --color-crt-dark: #0a0a0a;
+  --color-crt-bg: #101010;
+  --color-retro-gray: #8b8b8b;
+  --color-retro-dark: #222222;
+  --color-retro-light: #aaaaaa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+body {
+  font-family: var(--font-system);
+}
+
+/* CRT scanline effect */
+@keyframes scanlines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+.scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT flicker */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.998; }
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Typewriter effect */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 0.5s steps(30) forwards;
+}
+
+/* Boot progress bar */
+@keyframes progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.progress-fill {
+  animation: progress 2s ease-in-out forwards;
+}
+
+/* Power on glow */
+@keyframes powerGlow {
+  0%, 100% { box-shadow: 0 0 5px #33ff33, 0 0 10px #33ff33; }
+  50% { box-shadow: 0 0 10px #33ff33, 0 0 20px #33ff33, 0 0 40px #33ff33; }
+}
+
+.power-glow {
+  animation: powerGlow 3s ease-in-out infinite;
+}
