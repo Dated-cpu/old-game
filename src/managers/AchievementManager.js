@@ -79,6 +79,27 @@ const ACHIEVEMENTS = [
     check: (p) => p.memoryPoints >= 500,
   },
   {
+    id: "minesweeper_easy",
+    name: "Clear Mind",
+    desc: "Win Minesweeper on Easy",
+    icon: "🧹",
+    check: (p) => p.gameData?.minesweeper?.bestTimes?.easy != null,
+  },
+  {
+    id: "minesweeper_medium",
+    name: "Strategist",
+    desc: "Win Minesweeper on Medium",
+    icon: "🧠",
+    check: (p) => p.gameData?.minesweeper?.bestTimes?.medium != null,
+  },
+  {
+    id: "minesweeper_hard",
+    name: "Sapper",
+    desc: "Win Minesweeper on Hard",
+    icon: "💎",
+    check: (p) => p.gameData?.minesweeper?.bestTimes?.hard != null,
+  },
+  {
     id: "century",
     name: "Century",
     desc: "Score 100 points in any game",

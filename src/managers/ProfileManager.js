@@ -12,6 +12,7 @@ function defaultProfile() {
     gamesPlayed: {},
     achievements: [],
     memoryPoints: 0,
+    gameData: {},
   }
 }
 
@@ -78,6 +79,18 @@ class ProfileManager {
     this.#data.achievements.push(id)
     this.#save()
     return true
+  }
+
+  static updateGameData(gameId, data) {
+    if (!this.#data) this.init()
+    if (!this.#data.gameData) this.#data.gameData = {}
+    this.#data.gameData[gameId] = { ...this.#data.gameData[gameId], ...data }
+    this.#save()
+  }
+
+  static getGameData(gameId) {
+    if (!this.#data) this.init()
+    return { ...this.#data.gameData?.[gameId] } || {}
   }
 
   static subscribe(fn) {

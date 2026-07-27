@@ -1,13 +1,29 @@
 import { useState, useEffect, useRef } from "react"
-import SnakeGame from "../games/Snake/SnakeGame"
 import ProfileWindow from "./ProfileWindow"
 import ProfileManager from "../managers/ProfileManager"
 import AchievementManager from "../managers/AchievementManager"
+import { gameRegistry } from "../games/registry"
+
+function getWindowWidth(game) {
+  if (game.system) return "max-w-md"
+  if (game.id === "minesweeper") return "max-w-2xl"
+  if (game.id === "snake") return "max-w-sm"
+  return "max-w-md"
+}
+
+function getContentPadding(game) {
+  if (game.system) return "p-6"
+  if (game.id === "minesweeper") return "p-3"
+  if (game.id === "snake") return "p-4"
+  return "p-6 min-h-[160px]"
+}
 
 export default function GameWindow({ game, onClose }) {
   const [phase, setPhase] = useState(() => (game.system ? "ready" : "booting"))
   const [dots, setDots] = useState("")
   const startTime = useRef(null)
+
+  const GameComponent = gameRegistry[game.id]
 
   useEffect(() => {
     if (game.system) return
@@ -73,7 +89,7 @@ export default function GameWindow({ game, onClose }) {
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       <div className="absolute inset-0 bg-black/60" onClick={handleClose} />
 
-      <div className={`relative w-full ${game.id === "snake" ? "max-w-sm" : "max-w-md"} border-2 border-crt-green/40 bg-crt-bg shadow-[0_0_20px_rgba(51,255,51,0.15)]`}>
+      <div className={`relative w-full ${getWindowWidth(game)} border-2 border-crt-green/40 bg-crt-bg shadow-[0_0_20px_rgba(51,255,51,0.15)]`}>
         {/* Title bar */}
         <div className="flex items-center justify-between bg-gradient-to-r from-crt-green/20 to-crt-green/10 border-b border-crt-green/30 px-3 py-2">
           <div className="flex items-center gap-2">
@@ -91,11 +107,11 @@ export default function GameWindow({ game, onClose }) {
         </div>
 
         {/* Body */}
-        <div className={`flex flex-col justify-center ${game.id === "snake" ? "p-4" : "p-6 min-h-[160px]"}`}>
+        <div className={`flex flex-col justify-center ${getContentPadding(game)}`}>
           {game.system ? (
             <ProfileWindow />
-          ) : game.id === "snake" && phase === "ready" ? (
-            <SnakeGame />
+          ) : GameComponent && phase === "ready" ? (
+            <GameComponent />
           ) : (
             <div className="text-crt-green font-mono text-sm space-y-2">
               {phase === "booting" && (

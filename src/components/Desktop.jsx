@@ -5,6 +5,7 @@ import { useProfile } from "../managers/ProfileManager"
 const games = [
   { id: "tetris", name: "Tetris", icon: "🎮" },
   { id: "snake", name: "Snake", icon: "🐍" },
+  { id: "minesweeper", name: "Minesweeper", icon: "💣" },
   { id: "pong", name: "Pong", icon: "🏓" },
   { id: "mario", name: "Super Mario", icon: "🍄" },
   { id: "pacman", name: "Pac-Man", icon: "👾" },
