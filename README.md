@@ -1,16 +1,41 @@
-# React + Vite
+# NostalgiaOS
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+![NostalgiaOS boot screen](docs/preview.png)
 
-Currently, two official plugins are available:
+Ретро-десктоп в браузере: загрузочный экран в стиле CRT, сканирующие линии,
+иконки игр и локальный профиль игрока.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Что внутри
 
-## React Compiler
+- Boot-сцена с посимвольным выводом и прогресс-баром.
+- Ретро-десктоп с CRT-эффектами и taskbar.
+- **Snake** и **Minesweeper**.
+- Профиль игрока: запуски, наигранное время, рекорды, Memory Points.
+- Достижения и localStorage-персистентность.
+- Атмосфера старых портативных консолей: зелёная монохромная палитра, scanlines, glow.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Стек
 
-## Expanding the Oxlint configuration
+- React 19 + Vite
+- Tailwind CSS 4
+- localStorage
+- Canvas/Grid-механики для игр
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Запуск
+
+```bash
+npm install
+npm run dev
+```
+
+Сборка:
+
+```bash
+npm run build
+npm run preview
+```
+
+## Статус
+
+Прототип. Сейчас чиню boot-сценарий: после загрузки на некоторых сборках
+десктоп не успевает инициализироваться. Игры и профиль уже написаны.
